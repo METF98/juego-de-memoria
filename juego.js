@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   jugar();
 });
 
+/**
+ * @description Funcion que muestra el mensaje de bienvenida
+ * @returns {void}
+ * @author Miguel Ticaray
+ * @version 1.0
+ */
 function welcome(){
   let modal_message_container = document.createElement("div");
   let message_container = document.createElement("div");
@@ -66,6 +72,13 @@ function welcome(){
   });
 }
 
+/**
+ * @description Funcion que inicia el juego
+ * @returns {void}
+ * @author Miguel Ticaray
+ * @version 1.0
+ *
+ */
 function jugar() {
   welcome();
   crearCarta(array_cartas);
@@ -77,6 +90,13 @@ function jugar() {
   });
 }
 
+/**
+ * @description Funcion que crea las cartas
+ * @param {Array} cartas - Array de cartas
+ * @returns {void}
+ * @author Miguel Ticaray
+ * @version 1.0
+ */
 function crearCarta(cartas) {
   cartas.sort(() => 0.5 - Math.random());
 
@@ -108,6 +128,13 @@ function crearCarta(cartas) {
   }
 }
 
+/**
+ * @description Funcion que selecciona la carta
+ * @param {Array} carta - Carta seleccionada
+ * @return {void}
+ * @author Miguel Ticaray
+ * @version 1.0
+ */
 function selectCarta(carta) {
   let carta_id = carta.id;
   let cartaData = array_cartas[carta_id];
@@ -167,6 +194,12 @@ function selectCarta(carta) {
 
 }
 
+/**
+ * @description Funcion que verifica si el jugador ha ganado
+ * @returns {void}
+ * @author Miguel Ticaray
+ * @version 1.0
+ */
 function verificarGanador() {
   if (array_cartas.every((c) => c.emparejada)) {
     let modal_message_container = document.createElement("div");
