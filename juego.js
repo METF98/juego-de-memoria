@@ -16,7 +16,58 @@ document.addEventListener("DOMContentLoaded", () => {
   jugar();
 });
 
+function welcome(){
+  let modal_message_container = document.createElement("div");
+  let message_container = document.createElement("div");
+  let message = document.createElement("p");
+
+  modal_message_container.classList.add(
+    "w-screen",
+    "h-screen",
+    "fixed",
+    "top-0",
+    "left-0",
+    "bg-zinc-900/50",
+    "z-1",
+    "flex",
+    "justify-center",
+    "items-center",
+    "cursor-pointer"
+  );
+  message_container.classList.add(
+    "flex",
+    "flex-col",
+    "gap-4",
+    "items-center",
+    "justify-center",
+    "bg-zinc-300",
+    "p-4",
+    "rounded-lg",
+    "cursor-pointer"
+  );
+  message.classList.add(
+    "text-zinc-900",
+    "text-2xl",
+    "font-bold",
+    "text-center",
+    "cursor-pointer"
+
+  );
+
+  message.textContent = "Bienvenido al Juego de Memoria 🎉 Preciona o da click para iniciar";
+
+  document.body.appendChild(modal_message_container);
+  modal_message_container.appendChild(message_container);
+  message_container.appendChild(message);
+
+  document.addEventListener("click", () => {
+    modal_message_container.remove();
+    return;
+  });
+}
+
 function jugar() {
+  welcome();
   crearCarta(array_cartas);
   document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("click", () => {
@@ -97,18 +148,72 @@ function selectCarta(carta) {
       } else {
         [carta1, carta2].forEach((c) => {
           let card = document.querySelectorAll(".card")[c.index];
-          card.children[0].classList.remove("opacity-100");
-          card.children[0].classList.add("opacity-0");
-          array_cartas[c.index].volteada = false;
+          gsap.to(card, {
+            rotateY: 0,
+            duration: 0.5,
+            onStart: () => {
+              card.children[0].classList.remove("opacity-100");
+              card.children[0].classList.add("opacity-0");
+              array_cartas[c.index].volteada = false;
+            }
+          });
         });
       }
-      if (array_cartas.every((c) => c.emparejada)) {
-        alert("Ganaste");
-        window.location.reload();
-      } else {
-        cartasVolteadas = [];
-        bloquearjuego = false;
-      }
-    }, 500);
+      verificarGanador();
+      cartasVolteadas = [];
+      bloquearjuego = false;
+    }, 1000);
+  }
+
+}
+
+function verificarGanador() {
+  if (array_cartas.every((c) => c.emparejada)) {
+    let modal_message_container = document.createElement("div");
+    let message_container = document.createElement("div");
+    let message = document.createElement("p");
+
+    modal_message_container.classList.add(
+    "w-screen",
+    "h-screen",
+    "fixed",
+    "top-0",
+    "left-0",
+    "bg-zinc-900/50",
+    "z-1",
+    "flex",
+    "justify-center",
+    "items-center",
+    "cursor-pointer"
+    );
+    message_container.classList.add(
+      "flex",
+      "flex-col",
+      "gap-4",
+      "items-center",
+      "justify-center",
+      "bg-zinc-300",
+      "p-4",
+      "rounded-lg",
+      "cursor-pointer"
+    );
+    message.classList.add(
+      "text-zinc-900",
+      "text-2xl",
+      "font-bold",
+      "text-center",
+      "cursor-pointer"
+    );
+
+    message.textContent = "🎊¡GANASTE!🎊 \n Preciona o da click para jugar de nuevo";
+
+    document.body.appendChild(modal_message_container);
+    modal_message_container.appendChild(message_container);
+    message_container.appendChild(message);
+
+    document.addEventListener("click", () => {
+      modal_message_container.remove();
+      window.location.reload();
+    });
   }
 }
