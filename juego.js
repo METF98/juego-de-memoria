@@ -2,6 +2,14 @@ const simbolos = [
   { valor: "❤️", volteada: false, emparejada: false },
   { valor: "🧡", volteada: false, emparejada: false },
   { valor: "🌙", volteada: false, emparejada: false },
+  { valor: "✋", volteada: false, emparejada: false },
+  { valor: "🎊", volteada: false, emparejada: false },
+  { valor: "✌️", volteada: false, emparejada: false },
+  { valor: "✊", volteada: false, emparejada: false },
+  { valor: "👌", volteada: false, emparejada: false },
+  { valor: "🙌", volteada: false, emparejada: false },
+  { valor: "👍", volteada: false, emparejada: false },
+
 ];
 
 let array_cartas = [
@@ -60,7 +68,7 @@ function welcome(){
 
   );
 
-  message.textContent = "Bienvenido al Juego de Memoria 🎉 Preciona o da click para iniciar";
+  message.textContent = "Bienvenido al Juego de Memoria 🎉 Presiona o da click para iniciar";
 
   document.body.appendChild(modal_message_container);
   modal_message_container.appendChild(message_container);
@@ -68,6 +76,7 @@ function welcome(){
 
   document.addEventListener("click", () => {
     modal_message_container.remove();
+    inicio=false;
     return;
   });
 }
@@ -107,10 +116,9 @@ function crearCarta(cartas) {
     let valor = document.createElement("p");
     carta.classList.add(
       "card",
-      "md:w-70",
-      "md:h-50",
-      "w-50",
-      "h-50",
+      "py-8",
+      "xl:py-16",
+      "xl:px-2",
       "bg-blue-500",
       "flex",
       "items-center",
@@ -238,7 +246,7 @@ function verificarGanador() {
       "cursor-pointer"
     );
 
-    message.textContent = "🎊¡GANASTE!🎊 \n Preciona o da click para jugar de nuevo";
+    message.textContent = "🎊¡GANASTE!🎊 Presiona o da click para jugar de nuevo";
 
     document.body.appendChild(modal_message_container);
     modal_message_container.appendChild(message_container);
