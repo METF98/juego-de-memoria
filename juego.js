@@ -86,7 +86,6 @@ function welcome(){
  * @returns {void}
  * @author Miguel Ticaray
  * @version 1.0
- *
  */
 function jugar() {
   welcome();
